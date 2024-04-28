@@ -2,7 +2,7 @@
 using Project_api.Context;
 using Project_api.Model;
 
-public interface DetailInvoicesRepository
+public interface IDetailInvoicesRepository
 {
     Task<List<DetailInvoices>> GetAllDetailInvoices();
     Task<DetailInvoices?> GetDetailInvoiceById(int detailInvoiceId);
@@ -11,7 +11,7 @@ public interface DetailInvoicesRepository
     Task<bool> DeleteDetailInvoice(int detailInvoiceId);
 }
 
-public class DetailInvoicesRepository : DetailInvoicesRepository
+public class DetailInvoicesRepository : IDetailInvoicesRepository
 {
     private readonly DbProject _context;
 
