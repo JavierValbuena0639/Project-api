@@ -10,13 +10,15 @@ namespace Project_api.Context
             { 
 
             }
-    public DbSet<Users> users {  get; set; }
-    public DbSet<Store> corps { get; set; }
-    public DbSet<Clients> levels {  get; set; }
-    public DbSet<Trades> trades {  get; set; }
-    public DbSet<ProductType> matchs {  get; set; }
-    public DbSet<Product> items {  get; set; }
-    public DbSet<Enemys> enemys {  get; set; }
+        public DbSet<Clients> clients {  get; set; }
+        public DbSet<DetailInvoices> detailInvoices { get; set; }
+        public DbSet<Games> games { get; set; }
+        public DbSet<Invoices> invoices {  get; set; }
+        public DbSet<Products> products {  get; set; }
+        public DbSet<Productions> productions {  get; set; }
+        public DbSet<ProductTypes> productTypes {  get; set; }
+        public DbSet<Stores> stores {  get; set; }
+        public DbSet<Users> users {  get; set; }
 
     }
 }

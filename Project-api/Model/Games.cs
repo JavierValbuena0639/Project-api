@@ -3,14 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project_api.Model
 {
-    public class Store
+    public class Games : Products
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdStore { get; set; }
-        public string? NameStore { get; set; }
-        public DateTime? DateCreate { get; set; }
-        public int? idSell  { get; set; }
-
+        public int IdGame { get; set; }
+        public string? GameName { get; set; }
+        public string? Genre { get; set; }
+        public new float Price { get; set; }
     }
 }
