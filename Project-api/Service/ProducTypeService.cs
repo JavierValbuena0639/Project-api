@@ -15,9 +15,9 @@ namespace Project_api.Services
 
     public class ProductTypeService : IProductTypesService
     {
-        private readonly IProductTypesService _productTypesRepository;
+        private readonly IProductTypesRepository _productTypesRepository;
 
-        public ProductTypeService(IProductTypesService productTypesRepository)
+        public ProductTypeService(IProductTypesRepository productTypesRepository)
         {
             _productTypesRepository = productTypesRepository;
         }

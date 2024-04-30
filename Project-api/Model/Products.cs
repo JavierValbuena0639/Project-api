@@ -10,15 +10,13 @@ namespace Project_api.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProduct { get; set; }
         public string? ProductName { get; set; }
-        public int IdProductType { get; set; }
+        public int ProductTypeID { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
 
         // Foreign Key to ProductType
-        [ForeignKey("IdProductType")]
-        public required ProductTypes ProductType { get; set; }
+        [ForeignKey("ProductTypeID")]
+        public required ProductTypes IdProductType { get; set; }
 
-        // One-to-Many relationship with Production
-        public required ICollection<Productions> Productions { get; set; }
     }
 }

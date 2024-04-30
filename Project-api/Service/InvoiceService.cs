@@ -15,9 +15,9 @@ namespace Project_api.Services
 
     public class InvoiceService : IInvoicesService
     {
-        private readonly IInvoicesService _invoicesRepository;
+        private readonly IInvoicesRepository _invoicesRepository;
 
-        public InvoiceService(IInvoicesService invoicesRepository)
+        public InvoiceService(IInvoicesRepository invoicesRepository)
         {
             _invoicesRepository = invoicesRepository;
         }

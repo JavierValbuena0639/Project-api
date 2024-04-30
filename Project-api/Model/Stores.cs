@@ -12,7 +12,5 @@ namespace Project_api.Model
         public string? StoreName { get; set; }
         public string? StoreAddress { get; set; }
 
-        // One-to-Many relationship with Production
-        public required ICollection<Productions> Productions { get; set; }
     }
 }

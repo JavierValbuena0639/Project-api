@@ -8,17 +8,13 @@ namespace Project_api.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProduction { get; set; }
-        public int IdProduct { get; set; }
+        public int ProductID { get; set; }
         public int Quantity { get; set; }
         public DateTime ProductionDate { get; set; }
 
         // Foreign Key to Product
-        [ForeignKey("IdProduct")]
-        public required Products Product { get; set; }
+        [ForeignKey("ProductID")]
+        public required Products IdProduct { get; set; }
 
-        // Foreign Key to Store (optional)
-        public int? IdStore { get; set; }
-        [ForeignKey("IdStore")]
-        public required Stores Store { get; set; }
     }
 }

@@ -8,15 +8,13 @@ namespace Project_api.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdInvoice { get; set; }
-        public int IdClient { get; set; }
+        public int ClientID { get; set; }
         public DateTime InvoiceDate { get; set; }
         public decimal TotalAmount { get; set; }
 
         // Foreign Key to Client
-        [ForeignKey("IdClient")]
-        public required Clients Client { get; set; }
+        [ForeignKey("ClientID")]
+        public required Clients IdClient { get; set; }
 
-        // One-to-Many relationship with DetailInvoice
-        public required ICollection<DetailInvoices> DetailInvoices { get; set; }
-    }
+        }
 }

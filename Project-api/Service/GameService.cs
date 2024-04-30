@@ -15,9 +15,9 @@ namespace Project_api.Services
 
     public class GameService : IGamesService
     {
-        private readonly IGamesService _gamesRepository;
+        private readonly IGamesRepository _gamesRepository;
 
-        public GameService(IGamesService gamesRepository)
+        public GameService(IGamesRepository gamesRepository)
         {
             _gamesRepository = gamesRepository;
         }

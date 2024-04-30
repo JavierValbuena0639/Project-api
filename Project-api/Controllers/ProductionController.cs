@@ -45,7 +45,7 @@ namespace Project_api.Controllers
         [HttpPut("{productionId}")]
         public async Task<IActionResult> UpdateProduction(int productionId, Productions production)
         {
-            if (productionId != production.IdProduct)
+            if (productionId != production.IdProduction)
             {
                 return BadRequest();
             }

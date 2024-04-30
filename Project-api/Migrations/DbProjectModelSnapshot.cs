@@ -46,6 +46,9 @@ namespace Project_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDetailInvoice"));
 
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdInvoice")
                         .HasColumnType("int");
 
@@ -55,6 +58,9 @@ namespace Project_api.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -62,6 +68,8 @@ namespace Project_api.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdDetailInvoice");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("IdInvoice");
 
@@ -78,13 +86,21 @@ namespace Project_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdGame"));
 
-                    b.Property<string>("GameName")
+                    b.Property<string>("Level")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Genre")
+                    b.Property<string>("Points")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("IdGame");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("games");
                 });
@@ -97,7 +113,7 @@ namespace Project_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdInvoice"));
 
-                    b.Property<int>("IdClient")
+                    b.Property<int>("ClientID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InvoiceDate")
@@ -108,7 +124,7 @@ namespace Project_api.Migrations
 
                     b.HasKey("IdInvoice");
 
-                    b.HasIndex("IdClient");
+                    b.HasIndex("ClientID");
 
                     b.ToTable("invoices");
                 });
@@ -137,10 +153,7 @@ namespace Project_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduction"));
 
-                    b.Property<int>("IdProduct")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdStore")
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ProductionDate")
@@ -151,9 +164,7 @@ namespace Project_api.Migrations
 
                     b.HasKey("IdProduction");
 
-                    b.HasIndex("IdProduct");
-
-                    b.HasIndex("IdStore");
+                    b.HasIndex("ProductID");
 
                     b.ToTable("productions");
                 });
@@ -166,21 +177,21 @@ namespace Project_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduct"));
 
-                    b.Property<int>("IdProductType")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductTypeID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.HasKey("IdProduct");
 
-                    b.HasIndex("IdProductType");
+                    b.HasIndex("ProductTypeID");
 
                     b.ToTable("products");
                 });
@@ -228,8 +239,20 @@ namespace Project_api.Migrations
 
             modelBuilder.Entity("Project_api.Model.DetailInvoices", b =>
                 {
+                    b.HasOne("Project_api.Model.Games", "IdGame")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project_api.Model.Stores", "IdStore")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Project_api.Model.Invoices", "Invoice")
-                        .WithMany("DetailInvoices")
+                        .WithMany()
                         .HasForeignKey("IdInvoice")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -240,63 +263,55 @@ namespace Project_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("IdGame");
+
+                    b.Navigation("IdStore");
+
                     b.Navigation("Invoice");
 
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Project_api.Model.Games", b =>
+                {
+                    b.HasOne("Project_api.Model.Users", "IdUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("IdUser");
+                });
+
             modelBuilder.Entity("Project_api.Model.Invoices", b =>
                 {
-                    b.HasOne("Project_api.Model.Clients", "Client")
+                    b.HasOne("Project_api.Model.Clients", "IdClient")
                         .WithMany()
-                        .HasForeignKey("IdClient")
+                        .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("IdClient");
                 });
 
             modelBuilder.Entity("Project_api.Model.Productions", b =>
                 {
-                    b.HasOne("Project_api.Model.Products", "Product")
-                        .WithMany("Productions")
-                        .HasForeignKey("IdProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project_api.Model.Stores", "Store")
-                        .WithMany("Productions")
-                        .HasForeignKey("IdStore");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Store");
-                });
-
-            modelBuilder.Entity("Project_api.Model.Products", b =>
-                {
-                    b.HasOne("Project_api.Model.ProductTypes", "ProductType")
+                    b.HasOne("Project_api.Model.Products", "IdProduct")
                         .WithMany()
-                        .HasForeignKey("IdProductType")
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductType");
-                });
-
-            modelBuilder.Entity("Project_api.Model.Invoices", b =>
-                {
-                    b.Navigation("DetailInvoices");
+                    b.Navigation("IdProduct");
                 });
 
             modelBuilder.Entity("Project_api.Model.Products", b =>
                 {
-                    b.Navigation("Productions");
-                });
+                    b.HasOne("Project_api.Model.ProductTypes", "IdProductType")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Project_api.Model.Stores", b =>
-                {
-                    b.Navigation("Productions");
+                    b.Navigation("IdProductType");
                 });
 #pragma warning restore 612, 618
         }

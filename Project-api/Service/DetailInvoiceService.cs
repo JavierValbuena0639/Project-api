@@ -15,9 +15,9 @@ namespace Project_api.Services
 
     public class DetailInvoiceService : IDetailInvoicesService
     {
-        private readonly IDetailInvoicesService _detailInvoicesRepository;
+        private readonly IDetailInvoicesRepository _detailInvoicesRepository;
 
-        public DetailInvoiceService(IDetailInvoicesService detailInvoicesRepository)
+        public DetailInvoiceService(IDetailInvoicesRepository detailInvoicesRepository)
         {
             _detailInvoicesRepository = detailInvoicesRepository;
         }

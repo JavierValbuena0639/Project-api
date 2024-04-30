@@ -15,9 +15,9 @@ namespace Project_api.Services
 
     public class ProductionService : IProductionsService
     {
-        private readonly IProductionsService _productionsRepository;
+        private readonly IProductionsRepository _productionsRepository;
 
-        public ProductionService(IProductionsService productionsRepository)
+        public ProductionService(IProductionsRepository productionsRepository)
         {
             _productionsRepository = productionsRepository;
         }

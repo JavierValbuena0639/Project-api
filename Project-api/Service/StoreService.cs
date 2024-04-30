@@ -15,9 +15,9 @@ namespace Project_api.Services
 
     public class StoreService : IStoresService
     {
-        private readonly IStoresService _storesRepository;
+        private readonly IStoresRepository _storesRepository;
 
-        public StoreService(IStoresService storesRepository)
+        public StoreService(IStoresRepository storesRepository)
         {
             _storesRepository = storesRepository;
         }

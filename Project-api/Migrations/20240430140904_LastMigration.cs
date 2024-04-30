@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project_api.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class LastMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,20 +22,6 @@ namespace Project_api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_clients", x => x.IdClient);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "games",
-                columns: table => new
-                {
-                    IdGame = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GameName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_games", x => x.IdGame);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,7 +72,7 @@ namespace Project_api.Migrations
                 {
                     IdInvoice = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdClient = table.Column<int>(type: "int", nullable: false),
+                    ClientID = table.Column<int>(type: "int", nullable: false),
                     InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -94,8 +80,8 @@ namespace Project_api.Migrations
                 {
                     table.PrimaryKey("PK_invoices", x => x.IdInvoice);
                     table.ForeignKey(
-                        name: "FK_invoices_clients_IdClient",
-                        column: x => x.IdClient,
+                        name: "FK_invoices_clients_ClientID",
+                        column: x => x.ClientID,
                         principalTable: "clients",
                         principalColumn: "IdClient",
                         onDelete: ReferentialAction.Cascade);
@@ -108,7 +94,7 @@ namespace Project_api.Migrations
                     IdProduct = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdProductType = table.Column<int>(type: "int", nullable: false),
+                    ProductTypeID = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false)
                 },
@@ -116,10 +102,52 @@ namespace Project_api.Migrations
                 {
                     table.PrimaryKey("PK_products", x => x.IdProduct);
                     table.ForeignKey(
-                        name: "FK_products_productTypes_IdProductType",
-                        column: x => x.IdProductType,
+                        name: "FK_products_productTypes_ProductTypeID",
+                        column: x => x.ProductTypeID,
                         principalTable: "productTypes",
                         principalColumn: "IdProductType",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "games",
+                columns: table => new
+                {
+                    IdGame = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Level = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Points = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_games", x => x.IdGame);
+                    table.ForeignKey(
+                        name: "FK_games_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "IdUser");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "productions",
+                columns: table => new
+                {
+                    IdProduction = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    ProductionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_productions", x => x.IdProduction);
+                    table.ForeignKey(
+                        name: "FK_productions_products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "products",
+                        principalColumn: "IdProduct",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -129,6 +157,8 @@ namespace Project_api.Migrations
                 {
                     IdDetailInvoice = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    GameId = table.Column<int>(type: "int", nullable: false),
+                    StoreId = table.Column<int>(type: "int", nullable: false),
                     IdInvoice = table.Column<int>(type: "int", nullable: false),
                     IdProduct = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -138,6 +168,12 @@ namespace Project_api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_detailInvoices", x => x.IdDetailInvoice);
+                    table.ForeignKey(
+                        name: "FK_detailInvoices_games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "games",
+                        principalColumn: "IdGame",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_detailInvoices_invoices_IdInvoice",
                         column: x => x.IdInvoice,
@@ -150,34 +186,18 @@ namespace Project_api.Migrations
                         principalTable: "products",
                         principalColumn: "IdProduct",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_detailInvoices_stores_GameId",
+                        column: x => x.GameId,
+                        principalTable: "stores",
+                        principalColumn: "IdStore",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "productions",
-                columns: table => new
-                {
-                    IdProduction = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdProduct = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdStore = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_productions", x => x.IdProduction);
-                    table.ForeignKey(
-                        name: "FK_productions_products_IdProduct",
-                        column: x => x.IdProduct,
-                        principalTable: "products",
-                        principalColumn: "IdProduct",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_productions_stores_IdStore",
-                        column: x => x.IdStore,
-                        principalTable: "stores",
-                        principalColumn: "IdStore");
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_detailInvoices_GameId",
+                table: "detailInvoices",
+                column: "GameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_detailInvoices_IdInvoice",
@@ -190,24 +210,24 @@ namespace Project_api.Migrations
                 column: "IdProduct");
 
             migrationBuilder.CreateIndex(
-                name: "IX_invoices_IdClient",
+                name: "IX_games_UserId",
+                table: "games",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_invoices_ClientID",
                 table: "invoices",
-                column: "IdClient");
+                column: "ClientID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productions_IdProduct",
+                name: "IX_productions_ProductID",
                 table: "productions",
-                column: "IdProduct");
+                column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productions_IdStore",
-                table: "productions",
-                column: "IdStore");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_products_IdProductType",
+                name: "IX_products_ProductTypeID",
                 table: "products",
-                column: "IdProductType");
+                column: "ProductTypeID");
         }
 
         /// <inheritdoc />
@@ -217,22 +237,22 @@ namespace Project_api.Migrations
                 name: "detailInvoices");
 
             migrationBuilder.DropTable(
-                name: "games");
-
-            migrationBuilder.DropTable(
                 name: "productions");
 
             migrationBuilder.DropTable(
-                name: "users");
+                name: "games");
 
             migrationBuilder.DropTable(
                 name: "invoices");
 
             migrationBuilder.DropTable(
+                name: "stores");
+
+            migrationBuilder.DropTable(
                 name: "products");
 
             migrationBuilder.DropTable(
-                name: "stores");
+                name: "users");
 
             migrationBuilder.DropTable(
                 name: "clients");

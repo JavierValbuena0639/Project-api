@@ -16,9 +16,9 @@ namespace Project_api.Services
 
     public class ClientService : IClientsService
     {
-        private readonly IClientsService _clientsRepository;
+        private readonly IClientsRepository _clientsRepository;
 
-        public ClientService(IClientsService clientsRepository)
+        public ClientService(IClientsRepository clientsRepository)
         {
             _clientsRepository = clientsRepository;
         }
