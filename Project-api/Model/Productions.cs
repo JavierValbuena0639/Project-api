@@ -19,6 +19,6 @@ namespace Project_api.Model
         // Foreign Key to Store (optional)
         public int? IdStore { get; set; }
         [ForeignKey("IdStore")]
-        public required StoresRepository Store { get; set; }
+        public required Stores Store { get; set; }
     }
 }

@@ -14,8 +14,7 @@ namespace Project_api.Model
         Task<bool> DeleteGame(int gameId);
     }
 
-    public class IUGamesRepository
-    {
+
             public class GamesRepository : IGamesRepository
             {
             private readonly DbProject _context;
@@ -64,5 +63,5 @@ namespace Project_api.Model
             }
 
     }
-}
+
 

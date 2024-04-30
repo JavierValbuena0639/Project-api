@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Project_api.Model;
+using Project_api.Repository;
 
 namespace Project_api.Services
 {
-    public interface IClientsRepository
+    public interface IClientsService
     {
         Task<List<Clients>> GetAllClients();
         Task<Clients?> GetClientById(int clientId);
@@ -13,11 +14,11 @@ namespace Project_api.Services
         Task<bool> DeleteClient(int clientId);
     }
 
-    public class ClientService : IClientsRepository
+    public class ClientService : IClientsService
     {
-        private readonly IClientsRepository _clientsRepository;
+        private readonly IClientsService _clientsRepository;
 
-        public ClientService(IClientsRepository clientsRepository)
+        public ClientService(IClientsService clientsRepository)
         {
             _clientsRepository = clientsRepository;
         }

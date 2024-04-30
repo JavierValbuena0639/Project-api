@@ -4,7 +4,7 @@ using Project_api.Model;
 
 namespace Project_api.Services
 {
-    public interface DetailInvoicesRepository
+    public interface IDetailInvoicesService
     {
         Task<List<DetailInvoices>> GetAllDetailInvoices();
         Task<DetailInvoices?> GetDetailInvoiceById(int detailInvoiceId);
@@ -13,11 +13,11 @@ namespace Project_api.Services
         Task<bool> DeleteDetailInvoice(int detailInvoiceId);
     }
 
-    public class DetailInvoiceService : DetailInvoicesRepository
+    public class DetailInvoiceService : IDetailInvoicesService
     {
-        private readonly DetailInvoicesRepository _detailInvoicesRepository;
+        private readonly IDetailInvoicesService _detailInvoicesRepository;
 
-        public DetailInvoiceService(DetailInvoicesRepository detailInvoicesRepository)
+        public DetailInvoiceService(IDetailInvoicesService detailInvoicesRepository)
         {
             _detailInvoicesRepository = detailInvoicesRepository;
         }

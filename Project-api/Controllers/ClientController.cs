@@ -10,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly IClientsRepository _clientService;
+        private readonly IClientsService _clientService;
 
-        public ClientController(IClientsRepository clientService)
+        public ClientController(IClientsService clientService)
         {
             _clientService = clientService;
         }
