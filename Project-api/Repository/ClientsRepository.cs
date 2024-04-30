@@ -1,14 +1,14 @@
-﻿using Project_api.Model; // Assuming models are in a separate folder named "Model"
+﻿using Project_api.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Project_api.Context; // Assuming context is in a separate folder named "Context"
+using Project_api.Context;
 
 namespace Project_api.Repository
 {
-    public interface IClientsRepository
+    public interface IClientRepository
     {
         Task<List<Clients>> GetAllClients();
         Task<Clients?> GetClientById(int clientId);
@@ -17,11 +17,11 @@ namespace Project_api.Repository
         Task<bool> DeleteClient(int clientId);
     }
 
-    public class ClientsRepository : IClientsRepository
+    public class ClientRepository : IClientRepository
     {
         private readonly DbProject _context;
 
-        public ClientsRepository(DbProject context)
+        public ClientRepository(DbProject context)
         {
             _context = context;
         }
@@ -45,7 +45,13 @@ namespace Project_api.Repository
 
         public async Task<Clients> UpdateClient(Clients client)
         {
-            _context.Entry(client).State = EntityState.Modified;
+            var existingClient = await _context.clients.FindAsync(client.IdClient);
+            if (existingClient == null)
+            {
+                throw new InvalidOperationException("Client not found.");
+            }
+
+            _context.Entry(existingClient).CurrentValues.SetValues(client);
             await _context.SaveChangesAsync();
             return client;
         }

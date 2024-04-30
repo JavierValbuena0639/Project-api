@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 
 #region AppRepo
 
-builder.Services.AddScoped<IClientsRepository,ClientsRepository> ();
+builder.Services.AddScoped<IClientRepository, ClientRepository> ();
 builder.Services.AddScoped<IDetailInvoicesRepository, DetailInvoicesRepository>();
 builder.Services.AddScoped<IGamesRepository, GamesRepository>();
 builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
