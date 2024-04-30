@@ -16,25 +16,25 @@ builder.Services.AddControllers();
 #region AppRepo
 
 builder.Services.AddScoped<IClientsRepository,ClientsRepository> ();
-builder.Services.AddScoped<IDetailInvoicesRepository, DetailInvoicesRepository>();
-builder.Services.AddScoped<IGamesRepository, GamesRepository>();
-builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
-builder.Services.AddScoped<IProductionsRepository, ProductionsRepository>();
-builder.Services.AddScoped<IProductTypesRepository, ProductTypesRepository>();
-builder.Services.AddScoped<IStoresRepository, StoresRepository>();
-builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+//builder.Services.AddScoped<IDetailInvoicesRepository, DetailInvoicesRepository>();
+//builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+//builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
+//builder.Services.AddScoped<IProductionsRepository, ProductionsRepository>();
+//builder.Services.AddScoped<IProductTypesRepository, ProductTypesRepository>();
+//builder.Services.AddScoped<IStoresRepository, StoresRepository>();
+//builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 #endregion
 
 #region AppService
 builder.Services.AddScoped<IClientsService, ClientService>();
-builder.Services.AddScoped< IDetailInvoicesService, DetailInvoiceService>();
-builder.Services.AddScoped<IGamesService, GameService>();
-builder.Services.AddScoped<IInvoicesService, InvoiceService>();
-builder.Services.AddScoped<IProductionsService, ProductionService>();
-builder.Services.AddScoped<IProductTypesService, ProductTypeService>();
-builder.Services.AddScoped<IStoresService, StoreService>();
-builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped< IDetailInvoicesService, DetailInvoiceService>();
+//builder.Services.AddScoped<IGamesService, GameService>();
+//builder.Services.AddScoped<IInvoicesService, InvoiceService>();
+//builder.Services.AddScoped<IProductionsService, ProductionService>();
+//builder.Services.AddScoped<IProductTypesService, ProductTypeService>();
+//builder.Services.AddScoped<IStoresService, StoreService>();
+//builder.Services.AddScoped<IUserService, UserService>();
 #endregion
 
 

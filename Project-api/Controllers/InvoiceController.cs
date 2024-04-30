@@ -3,7 +3,6 @@ using Project_api.Model;
 using Project_api.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ModelIInvoicesRepository = Project_api.Model.IInvoicesRepository;
 using ServiceIInvoicesService = Project_api.Services.IInvoicesService;
 
 namespace Project_api.Controllers

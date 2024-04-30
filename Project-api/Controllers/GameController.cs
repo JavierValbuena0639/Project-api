@@ -3,7 +3,6 @@ using Project_api.Model;
 using Project_api.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ModelIGamesRepository = Project_api.Model.IGamesRepository;
 using ServiceIGameService = Project_api.Services.IGamesService;
 
 namespace Project_api.Controllers
