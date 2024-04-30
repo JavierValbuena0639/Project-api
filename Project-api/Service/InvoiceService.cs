@@ -4,7 +4,7 @@ using Project_api.Model;
 
 namespace Project_api.Services
 {
-    public interface IInvoicesRepository
+    public interface IInvoicesService
     {
         Task<List<Invoices>> GetAllInvoices();
         Task<Invoices?> GetInvoiceById(int invoiceId);
@@ -13,11 +13,11 @@ namespace Project_api.Services
         Task<bool> DeleteInvoice(int invoiceId);
     }
 
-    public class InvoiceService : IInvoicesRepository
+    public class InvoiceService : IInvoicesService
     {
-        private readonly IInvoicesRepository _invoicesRepository;
+        private readonly IInvoicesService _invoicesRepository;
 
-        public InvoiceService(IInvoicesRepository invoicesRepository)
+        public InvoiceService(IInvoicesService invoicesRepository)
         {
             _invoicesRepository = invoicesRepository;
         }

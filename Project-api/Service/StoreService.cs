@@ -4,7 +4,7 @@ using Project_api.Model;
 
 namespace Project_api.Services
 {
-    public interface IStoresRepository
+    public interface IStoresService
     {
         Task<List<Stores>> GetAllStores();
         Task<Stores?> GetStoreById(int storeId);
@@ -13,11 +13,11 @@ namespace Project_api.Services
         Task<bool> DeleteStore(int storeId);
     }
 
-    public class StoreService : IStoresRepository
+    public class StoreService : IStoresService
     {
-        private readonly IStoresRepository _storesRepository;
+        private readonly IStoresService _storesRepository;
 
-        public StoreService(IStoresRepository storesRepository)
+        public StoreService(IStoresService storesRepository)
         {
             _storesRepository = storesRepository;
         }

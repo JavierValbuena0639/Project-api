@@ -4,7 +4,7 @@ using Project_api.Model;
 
 namespace Project_api.Services
 {
-    public interface IGamesRepository
+    public interface IGamesService
     {
         Task<List<Games>> GetAllGames();
         Task<Games?> GetGameById(int gameId);
@@ -13,11 +13,11 @@ namespace Project_api.Services
         Task<bool> DeleteGame(int gameId);
     }
 
-    public class GameService : IGamesRepository
+    public class GameService : IGamesService
     {
-        private readonly IGamesRepository _gamesRepository;
+        private readonly IGamesService _gamesRepository;
 
-        public GameService(IGamesRepository gamesRepository)
+        public GameService(IGamesService gamesRepository)
         {
             _gamesRepository = gamesRepository;
         }

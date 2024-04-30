@@ -4,7 +4,7 @@ using Project_api.Model;
 
 namespace Project_api.Services
 {
-    public interface IProductionsRepository
+    public interface IProductionsService
     {
         Task<List<Productions>> GetAllProductions();
         Task<Productions?> GetProductionById(int productionId);
@@ -13,11 +13,11 @@ namespace Project_api.Services
         Task<bool> DeleteProduction(int productionId);
     }
 
-    public class ProductionService : IProductionsRepository
+    public class ProductionService : IProductionsService
     {
-        private readonly IProductionsRepository _productionsRepository;
+        private readonly IProductionsService _productionsRepository;
 
-        public ProductionService(IProductionsRepository productionsRepository)
+        public ProductionService(IProductionsService productionsRepository)
         {
             _productionsRepository = productionsRepository;
         }

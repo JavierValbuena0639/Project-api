@@ -17,24 +17,24 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IClientsRepository,ClientsRepository> ();
 builder.Services.AddScoped<IDetailInvoicesRepository, DetailInvoicesRepository>();
-//builder.Services.AddScoped<IGamesRepository, GameService>();
-//builder.Services.AddScoped<IInvoicesRepository, IInvoicesRepository>();
-//builder.Services.AddScoped<IProductionsRepository, ProductionService>();
-//builder.Services.AddScoped<IProductTypesRepository, ProductTypeService>();
-//builder.Services.AddScoped<IStoresRepository, StoreService>();
-//builder.Services.AddScoped<IUsersRepository, UserService>();
+builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
+builder.Services.AddScoped<IProductionsRepository, ProductionsRepository>();
+builder.Services.AddScoped<IProductTypesRepository, ProductTypesRepository>();
+builder.Services.AddScoped<IStoresRepository, StoresRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 #endregion
 
 #region AppService
 builder.Services.AddScoped<IClientsService, ClientService>();
-//builder.Services.AddScoped<DetailInvoiceService>();
-//builder.Services.AddScoped<GameService>();
-//builder.Services.AddScoped<InvoiceService>();
-//builder.Services.AddScoped<ProductionService>();
-//builder.Services.AddScoped<ProductTypeService>();
-//builder.Services.AddScoped<StoreService>();
-//builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped< IDetailInvoicesService, DetailInvoiceService>();
+builder.Services.AddScoped<IGamesService, GameService>();
+builder.Services.AddScoped<IInvoicesService, InvoiceService>();
+builder.Services.AddScoped<IProductionsService, ProductionService>();
+builder.Services.AddScoped<IProductTypesService, ProductTypeService>();
+builder.Services.AddScoped<IStoresService, StoreService>();
+builder.Services.AddScoped<IUserService, UserService>();
 #endregion
 
 

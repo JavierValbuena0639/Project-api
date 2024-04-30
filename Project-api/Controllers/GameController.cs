@@ -4,7 +4,7 @@ using Project_api.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModelIGamesRepository = Project_api.Model.IGamesRepository;
-using ServiceIGamesRepository = Project_api.Services.IGamesRepository;
+using ServiceIGameService = Project_api.Services.IGamesService;
 
 namespace Project_api.Controllers
 {
@@ -12,11 +12,11 @@ namespace Project_api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private readonly ServiceIGamesRepository _gameService;
+        private readonly ServiceIGameService _gameService;
 
-        public GameController(ServiceIGamesRepository gameService)
+        public GameController(ServiceIGameService userService)
         {
-            _gameService = gameService;
+            _gameService = userService;
         }
 
         [HttpGet]

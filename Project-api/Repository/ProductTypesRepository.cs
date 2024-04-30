@@ -16,7 +16,7 @@ namespace Project_api.Model
 
 
     public class ProductTypesRepository : IProductTypesRepository
-        {
+    {
             private readonly DbProject _context;
 
             public ProductTypesRepository(DbProject context)

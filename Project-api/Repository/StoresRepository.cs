@@ -15,7 +15,7 @@ namespace Project_api.Model
         Task<bool> DeleteStore(int storeId);
     }
 
-    public class StoresRepository
+    public class StoresRepository : IStoresRepository
     {
 
         private readonly DbProject _context;

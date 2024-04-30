@@ -4,7 +4,7 @@ using Project_api.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModelIInvoicesRepository = Project_api.Model.IInvoicesRepository;
-using ServiceIInvoicesRepository = Project_api.Services.IInvoicesRepository;
+using ServiceIInvoicesService = Project_api.Services.IInvoicesService;
 
 namespace Project_api.Controllers
 {
@@ -12,9 +12,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class InvoiceController : ControllerBase
     {
-        private readonly ServiceIInvoicesRepository _invoiceService;
+        private readonly ServiceIInvoicesService _invoiceService;
 
-        public InvoiceController(ServiceIInvoicesRepository invoiceService)
+        public InvoiceController(ServiceIInvoicesService invoiceService)
         {
             _invoiceService = invoiceService;
         }
