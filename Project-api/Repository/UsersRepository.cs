@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Project_api.Context;
-using static Project_api.Model.UsersRepository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Project_api.Model
 {
     public interface IUsersRepository
     {
         Task<List<Users>> GetAllUsers();
-        Task<Users?> GetUserById(int userId);
+        Task<Users> GetUserById(int userId);
         Task<Users> CreateUser(Users user);
         Task<Users> UpdateUser(Users user);
         Task<bool> DeleteUser(int userId);
     }
+
     public class UsersRepository : IUsersRepository
     {
         private readonly DbProject _context;
@@ -28,7 +28,7 @@ namespace Project_api.Model
             return await _context.users.ToListAsync();
         }
 
-        public async Task<Users?> GetUserById(int userId)
+        public async Task<Users> GetUserById(int userId)
         {
             return await _context.users.FindAsync(userId);
         }
@@ -60,5 +60,4 @@ namespace Project_api.Model
             return true;
         }
     }
-
 }

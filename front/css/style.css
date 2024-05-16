@@ -1,0 +1,40 @@
+#login-form,
+#search-container {
+  max-width: 400px;
+  margin: 50px auto; /* Se centra vertical y horizontalmente */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+#login-form h2,
+#search-container h2 {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+#search-results div {
+  margin: 10px 0;
+}

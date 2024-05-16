@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Project_api.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Project_api.Model;
 
 namespace Project_api.Services
 {
     public interface IUserService
     {
         Task<List<Users>> GetAllUsers();
-        Task<Users?> GetUserById(int userId);
+        Task<Users> GetUserById(int userId);
         Task<Users> CreateUser(Users user);
         Task<Users> UpdateUser(Users user);
         Task<bool> DeleteUser(int userId);
@@ -27,7 +27,7 @@ namespace Project_api.Services
             return await _userRepository.GetAllUsers();
         }
 
-        public async Task<Users?> GetUserById(int userId)
+        public async Task<Users> GetUserById(int userId)
         {
             return await _userRepository.GetUserById(userId);
         }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="css/stryles2.css">
+</head>
+<body>
+    <div id="create-user-form">
+        <h2>Crear Usuario</h2>
+        <form id="user-form">
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <button type="submit">Crear Usuario</button>
+        </form>
+        <button class="custom-button" onclick="window.location.href='index.html'">Regresar al inicio</button>
+    </div>
+
+    
+
+
+    <script>
+        document.getElementById("user-form").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+
+            // Datos del usuario a enviar
+            const userData = {
+                UserName: username,
+                Password: password,
+                Email: email
+            };
+
+            try {
+                const response = await fetch("http://swagger-api.somee.com/api/User", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                if (response.ok) {
+                    // Si la respuesta es satisfactoria, mostrar un mensaje de éxito
+                    alert("Usuario creado exitosamente");
+                    // Redirigir a index.html después de 2 segundos
+                    setTimeout(function() {
+                        window.location.href = "index.html";
+                    }, 2000);
+                } else {
+                    // Si la respuesta es un error, mostrar un mensaje de error
+                    alert("Error al crear usuario. Inténtelo de nuevo.");
+                }
+            } catch (error) {
+                // Manejar errores de red u otros errores
+                console.error("Error en la solicitud:", error);
+                alert("Error en la solicitud. Inténtelo de nuevo.");
+            }
+        });
+    </script>
+</body>
+</html>
