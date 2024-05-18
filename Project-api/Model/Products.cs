@@ -15,6 +15,6 @@ namespace Project_api.Model
 
         // Foreign Key to ProductType
         [ForeignKey("ProductTypeID")]
-        public ProductTypes IdProductType { get; set; }
+        public required ProductTypes IdProductType { get; set; }
     }
 }

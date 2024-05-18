@@ -14,6 +14,6 @@ namespace Project_api.Model
 
         // Foreign Key to Product
         [ForeignKey("ProductID")]
-        public Products IdProduct { get; set; }
+        public required Products IdProduct { get; set; }
     }
 }
