@@ -18,6 +18,6 @@ namespace Project_api.Model
 
         // Relación con el cliente (uno a uno)
         [ForeignKey("ClientID")]
-        public Clients IdClient { get; set; }
+        public required Clients IdClient { get; set; }
     }
 }

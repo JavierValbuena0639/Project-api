@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Project_api.Context;
 using Project_api.Model;
-using Project_api.Model.Project_api.Model;
 using Project_api.Repository;
 using Project_api.Services;
 
