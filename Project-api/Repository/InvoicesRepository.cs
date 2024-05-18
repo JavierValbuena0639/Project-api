@@ -13,7 +13,8 @@ namespace Project_api.Model
         Task<Invoices> UpdateInvoice(Invoices invoice);
         Task<bool> DeleteInvoice(int invoiceId);
     }
-
+    namespace Project_api.Model
+    {
         public class InvoicesRepository : IInvoicesRepository
         {
             private readonly DbProject _context;
@@ -60,6 +61,7 @@ namespace Project_api.Model
                 return true;
             }
         }
-
     }
+
+}
 

@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using Project_api.Model;
 
+public interface IInvoicesService
+{
+    Task<List<Invoices>> GetAllInvoices();
+    Task<Invoices?> GetInvoiceById(int invoiceId);
+    Task<Invoices> CreateInvoice(Invoices invoice);
+    Task<Invoices> UpdateInvoice(Invoices invoice);
+    Task<bool> DeleteInvoice(int invoiceId);
+}
+
 namespace Project_api.Services
 {
-    public interface IInvoicesService
-    {
-        Task<List<Invoices>> GetAllInvoices();
-        Task<Invoices?> GetInvoiceById(int invoiceId);
-        Task<Invoices> CreateInvoice(Invoices invoice);
-        Task<Invoices> UpdateInvoice(Invoices invoice);
-        Task<bool> DeleteInvoice(int invoiceId);
-    }
-
     public class InvoiceService : IInvoicesService
     {
         private readonly IInvoicesRepository _invoicesRepository;

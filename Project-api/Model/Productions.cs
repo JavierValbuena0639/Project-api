@@ -7,14 +7,13 @@ namespace Project_api.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdProduction { get; set; }
+        public int IdProduction { get; set; } // Elimina este campo
         public int ProductID { get; set; }
         public int Quantity { get; set; }
         public DateTime ProductionDate { get; set; }
 
         // Foreign Key to Product
         [ForeignKey("ProductID")]
-        public required Products IdProduct { get; set; }
-
+        public Products IdProduct { get; set; }
     }
 }

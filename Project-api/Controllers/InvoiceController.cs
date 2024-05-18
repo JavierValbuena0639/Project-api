@@ -3,7 +3,6 @@ using Project_api.Model;
 using Project_api.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ServiceIInvoicesService = Project_api.Services.IInvoicesService;
 
 namespace Project_api.Controllers
 {
@@ -11,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class InvoiceController : ControllerBase
     {
-        private readonly ServiceIInvoicesService _invoiceService;
+        private readonly IInvoicesService _invoiceService;
 
-        public InvoiceController(ServiceIInvoicesService invoiceService)
+        public InvoiceController(IInvoicesService invoiceService)
         {
             _invoiceService = invoiceService;
         }

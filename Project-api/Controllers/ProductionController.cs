@@ -42,6 +42,7 @@ namespace Project_api.Controllers
             return CreatedAtAction(nameof(GetProductionById), new { productionId = createdProduction.IdProduct }, createdProduction);
         }
 
+
         [HttpPut("{productionId}")]
         public async Task<IActionResult> UpdateProduction(int productionId, Productions production)
         {

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Project_api.Model
 {
@@ -16,7 +15,6 @@ namespace Project_api.Model
 
         // Foreign Key to ProductType
         [ForeignKey("ProductTypeID")]
-        public required ProductTypes IdProductType { get; set; }
-
+        public ProductTypes IdProductType { get; set; }
     }
 }

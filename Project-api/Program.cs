@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Project_api.Context;
 using Project_api.Model;
+using Project_api.Model.Project_api.Model;
 using Project_api.Repository;
 using Project_api.Services;
 
@@ -12,6 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<DbProject>(options => options.UseSqlServer(connectionString));
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corsPolicy", policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
 
 #region AppRepo
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
@@ -33,7 +44,6 @@ builder.Services.AddScoped<IInvoicesService, InvoiceService>();
 builder.Services.AddScoped<IProductionsService, ProductionService>();
 builder.Services.AddScoped<IProductTypesService, ProductTypeService>();
 builder.Services.AddScoped<IStoresService, StoreService>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductsService, ProductService>();
 builder.Services.AddScoped<IProductionsService, ProductionService>();
 builder.Services.AddScoped<IUserService, UserService>();
