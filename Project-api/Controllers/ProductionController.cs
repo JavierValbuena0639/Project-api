@@ -10,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class ProductionController : ControllerBase
     {
-        private readonly ProductionService _productionService;
+        private readonly IProductionsService _productionService;
 
-        public ProductionController(ProductionService productionService)
+        public ProductionController(IProductionsService productionService)
         {
             _productionService = productionService;
         }

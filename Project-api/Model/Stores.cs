@@ -11,6 +11,5 @@ namespace Project_api.Model
         public int IdStore { get; set; }
         public string? StoreName { get; set; }
         public string? StoreAddress { get; set; }
-
     }
 }

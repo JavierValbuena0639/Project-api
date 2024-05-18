@@ -10,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class DetailInvoiceController : ControllerBase
     {
-        private readonly DetailInvoicesRepository _detailInvoiceService;
+        private readonly IDetailInvoicesService _detailInvoiceService;
 
-        public DetailInvoiceController(DetailInvoicesRepository detailInvoiceService)
+        public DetailInvoiceController(IDetailInvoicesService detailInvoiceService)
         {
             _detailInvoiceService = detailInvoiceService;
         }

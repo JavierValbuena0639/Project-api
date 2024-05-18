@@ -10,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductService _productService;
+        private readonly IProductsService _productService;
 
-        public ProductController(ProductService productService)
+        public ProductController(IProductsService productService)
         {
             _productService = productService;
         }

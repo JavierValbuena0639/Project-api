@@ -17,7 +17,6 @@ namespace Project_api.Model
 
     public class StoresRepository : IStoresRepository
     {
-
         private readonly DbProject _context;
 
         public StoresRepository(DbProject context)
@@ -63,5 +62,4 @@ namespace Project_api.Model
         }
     }
 }
-
-
+    

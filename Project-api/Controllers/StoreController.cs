@@ -10,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class StoreController : ControllerBase
     {
-        private readonly StoreService _storeService;
+        private readonly IStoresService _storeService; // Cambiado de StoreService a IStoreService
 
-        public StoreController(StoreService storeService)
+        public StoreController(IStoresService storeService) // Cambiado de StoreService a IStoreService
         {
             _storeService = storeService;
         }
