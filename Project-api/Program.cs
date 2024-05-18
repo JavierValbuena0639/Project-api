@@ -56,6 +56,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors("corsPolicy"); 
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
