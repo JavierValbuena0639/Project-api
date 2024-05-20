@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Project_api.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Project_api.Model;
 
 namespace Project_api.Services
 {
     public interface IUserService
     {
         Task<List<Users>> GetAllUsers();
-        Task<Users?> GetUserById(int userId);
+        Task<Users?> GetUserByEmail(string email);
+        Task<Users?> GetUserByEmailAndPassword(string email, string password);
         Task<Users> CreateUser(Users user);
         Task<Users> UpdateUser(Users user);
-        Task<bool> DeleteUser(int userId);
+        Task<bool> DeleteUser(int idUser);
     }
 
     public class UserService : IUserService
@@ -27,9 +28,14 @@ namespace Project_api.Services
             return await _userRepository.GetAllUsers();
         }
 
-        public async Task<Users?> GetUserById(int userId)
+        public async Task<Users?> GetUserByEmail(string email)
         {
-            return await _userRepository.GetUserById(userId);
+            return await _userRepository.GetUserByEmail(email);
+        }
+
+        public async Task<Users?> GetUserByEmailAndPassword(string email, string password)
+        {
+            return await _userRepository.GetUserByEmailAndPassword(email, password);
         }
 
         public async Task<Users> CreateUser(Users user)
@@ -42,9 +48,9 @@ namespace Project_api.Services
             return await _userRepository.UpdateUser(user);
         }
 
-        public async Task<bool> DeleteUser(int userId)
+        public async Task<bool> DeleteUser(int idUser)
         {
-            return await _userRepository.DeleteUser(userId);
+            return await _userRepository.DeleteUser(idUser);
         }
     }
 }

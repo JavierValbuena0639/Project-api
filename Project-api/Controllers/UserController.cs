@@ -10,9 +10,9 @@ namespace Project_api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -24,10 +24,21 @@ namespace Project_api.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<Users>> GetUserById(int userId)
+        [HttpGet("{email}")]
+        public async Task<ActionResult<Users>> GetUserByEmail(string email)
         {
-            var user = await _userService.GetUserById(userId);
+            var user = await _userService.GetUserByEmail(email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        [HttpGet("login")]
+        public async Task<ActionResult<Users>> GetUserByEmailAndPassword([FromQuery] string email, [FromQuery] string password)
+        {
+            var user = await _userService.GetUserByEmailAndPassword(email, password);
             if (user == null)
             {
                 return NotFound();
@@ -39,13 +50,13 @@ namespace Project_api.Controllers
         public async Task<ActionResult<Users>> CreateUser(Users user)
         {
             var createdUser = await _userService.CreateUser(user);
-            return CreatedAtAction(nameof(GetUserById), new { userId = createdUser.IdUser }, createdUser);
+            return CreatedAtAction(nameof(GetUserByEmail), new { email = createdUser.Email }, createdUser);
         }
 
-        [HttpPut("{userId}")]
-        public async Task<IActionResult> UpdateUser(int userId, Users user)
+        [HttpPut("{idUser}")]
+        public async Task<IActionResult> UpdateUser(int idUser, Users user)
         {
-            if (userId != user.IdUser)
+            if (idUser != user.IdUser)
             {
                 return BadRequest();
             }
@@ -59,10 +70,10 @@ namespace Project_api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{userId}")]
-        public async Task<IActionResult> DeleteUser(int userId)
+        [HttpDelete("{idUser}")]
+        public async Task<IActionResult> DeleteUser(int idUser)
         {
-            var result = await _userService.DeleteUser(userId);
+            var result = await _userService.DeleteUser(idUser);
             if (!result)
             {
                 return NotFound();

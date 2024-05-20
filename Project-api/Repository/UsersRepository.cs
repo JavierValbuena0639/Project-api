@@ -1,19 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Project_api.Context;
-using static Project_api.Model.UsersRepository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Project_api.Model
 {
     public interface IUsersRepository
     {
         Task<List<Users>> GetAllUsers();
-        Task<Users?> GetUserById(int userId);
+        Task<Users?> GetUserByEmail(string email);
+        Task<Users?> GetUserByEmailAndPassword(string email, string password);
         Task<Users> CreateUser(Users user);
         Task<Users> UpdateUser(Users user);
-        Task<bool> DeleteUser(int userId);
+        Task<bool> DeleteUser(int idUser);
     }
+
     public class UsersRepository : IUsersRepository
     {
         private readonly DbProject _context;
@@ -28,9 +29,14 @@ namespace Project_api.Model
             return await _context.users.ToListAsync();
         }
 
-        public async Task<Users?> GetUserById(int userId)
+        public async Task<Users?> GetUserByEmail(string email)
         {
-            return await _context.users.FindAsync(userId);
+            return await _context.users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<Users?> GetUserByEmailAndPassword(string email, string password)
+        {
+            return await _context.users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
         }
 
         public async Task<Users> CreateUser(Users user)
@@ -47,9 +53,9 @@ namespace Project_api.Model
             return user;
         }
 
-        public async Task<bool> DeleteUser(int userId)
+        public async Task<bool> DeleteUser(int idUser)
         {
-            var user = await _context.users.FindAsync(userId);
+            var user = await _context.users.FindAsync(idUser);
             if (user == null)
             {
                 return false;
@@ -60,5 +66,4 @@ namespace Project_api.Model
             return true;
         }
     }
-
 }
